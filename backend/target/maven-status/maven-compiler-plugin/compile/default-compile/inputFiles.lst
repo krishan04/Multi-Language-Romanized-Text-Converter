@@ -1,5 +1,5 @@
-/Users/krishanlakhotia/Desktop/Projects/Multi-Language-Romanized-Text-Converter/src/main/java/com/TextConverter/Multi_Language_Romanized_Text_Converter/MultiLanguageRomanizedTextConverterApplication.java
-/Users/krishanlakhotia/Desktop/Projects/Multi-Language-Romanized-Text-Converter/src/main/java/com/TextConverter/Multi_Language_Romanized_Text_Converter/controller/TranslationController.java
-/Users/krishanlakhotia/Desktop/Projects/Multi-Language-Romanized-Text-Converter/src/main/java/com/TextConverter/Multi_Language_Romanized_Text_Converter/entity/TranslationHistory.java
-/Users/krishanlakhotia/Desktop/Projects/Multi-Language-Romanized-Text-Converter/src/main/java/com/TextConverter/Multi_Language_Romanized_Text_Converter/repository/TranslationHistoryRepository.java
-/Users/krishanlakhotia/Desktop/Projects/Multi-Language-Romanized-Text-Converter/src/main/java/com/TextConverter/Multi_Language_Romanized_Text_Converter/service/TranslationService.java
+/Users/krishanlakhotia/Desktop/Projects/Multi-Language-Romanized-Text-Converter/backend/src/main/java/com/TextConverter/Multi_Language_Romanized_Text_Converter/MultiLanguageRomanizedTextConverterApplication.java
+/Users/krishanlakhotia/Desktop/Projects/Multi-Language-Romanized-Text-Converter/backend/src/main/java/com/TextConverter/Multi_Language_Romanized_Text_Converter/controller/TranslationController.java
+/Users/krishanlakhotia/Desktop/Projects/Multi-Language-Romanized-Text-Converter/backend/src/main/java/com/TextConverter/Multi_Language_Romanized_Text_Converter/entity/TranslationHistory.java
+/Users/krishanlakhotia/Desktop/Projects/Multi-Language-Romanized-Text-Converter/backend/src/main/java/com/TextConverter/Multi_Language_Romanized_Text_Converter/repository/TranslationHistoryRepository.java
+/Users/krishanlakhotia/Desktop/Projects/Multi-Language-Romanized-Text-Converter/backend/src/main/java/com/TextConverter/Multi_Language_Romanized_Text_Converter/service/TranslationService.java

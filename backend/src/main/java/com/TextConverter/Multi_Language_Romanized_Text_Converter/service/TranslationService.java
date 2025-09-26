@@ -21,8 +21,8 @@ import java.util.concurrent.TimeUnit;
 public class TranslationService {
 
     private final TranslationHistoryRepository translationHistoryRepository;
-    private final String pythonPath = "/Users/krishanlakhotia/Desktop/Projects/Multi-Language-Romanized-Text-Converter/textconverter_env/bin/python3"; // Adjust to your Python interpreter path
-    private final String scriptPath = "/Users/krishanlakhotia/Desktop/Projects/Multi-Language-Romanized-Text-Converter/pythonModules/translator_cli.py"; // Adjust script path
+    private final String pythonPath = "/Users/krishanlakhotia/Desktop/Projects/Multi-Language-Romanized-Text-Converter/backend/textconverter_env/bin/python3"; // Adjust to your Python interpreter path
+    private final String scriptPath = "/Users/krishanlakhotia/Desktop/Projects/Multi-Language-Romanized-Text-Converter/backend/pythonModules/translator_cli.py"; // Adjust script path
 
     public TranslationService(TranslationHistoryRepository translationHistoryRepository) {
         this.translationHistoryRepository = translationHistoryRepository;
