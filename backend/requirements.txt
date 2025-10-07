@@ -1,4 +1,8 @@
-pip install googletrans==4.0.0-rc1
-pip install aksharamukha
-pip install PyPDF2
-pip install Unidecode
+googletrans==4.0.0-rc1
+aksharamukha
+PyPDF2
+Unidecode
+Pillow
+pytesseract
+pdf2image
+google-cloud-translate

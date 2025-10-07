@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api")
 public class TranslationController {
@@ -25,14 +25,25 @@ public class TranslationController {
 
         targetLanguage = targetLanguage.trim().toLowerCase();
         System.out.println("Language: "+targetLanguage);
+
         return translationService.translateAndSave(file, text, targetLanguage);
     }
 
-    @GetMapping("/History")
+    @GetMapping("/history")
     public List<TranslationHistory> getHistory(){
         List<TranslationHistory> history = translationService.getAllTranslationHistory();
-        ResponseEntity.ok(history);
+//        ResponseEntity.ok(history);
         return history;
     }
 
+    @DeleteMapping("history/{id}")
+    public ResponseEntity<String> deleteHistory(@PathVariable("id") Long id){
+        boolean deleted = translationService.deleteTranslationHistory(id);
+        if(deleted){
+            return ResponseEntity.ok("Deleted TranslationHistory");
+        }
+        else{
+            return ResponseEntity.status(404).body("TranslationHistory not found");
+        }
+    }
 }
