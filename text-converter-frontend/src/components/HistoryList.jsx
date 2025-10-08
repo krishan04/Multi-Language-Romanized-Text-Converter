@@ -6,7 +6,7 @@ export default function HistoryList() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/history")
+    fetch("https://multi-language-romanized-text-converter.onrender.com/api/history")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch history");
