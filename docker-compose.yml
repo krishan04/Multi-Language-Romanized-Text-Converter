@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: textconverter-postgres
+    environment:
+      POSTGRES_USER: textconverteruser
+      POSTGRES_PASSWORD: textconverterpass
+      POSTGRES_DB: textconverterdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: textconverter-backend
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/textconverterdb
+      SPRING_DATASOURCE_USERNAME: textconverteruser
+      SPRING_DATASOURCE_PASSWORD: textconverterpass
+    depends_on:
+      - postgres
+
+  frontend:
+    build:
+      context: ./text-converter-frontend
+      dockerfile: Dockerfile
+    container_name: textconverter-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:

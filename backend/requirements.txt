@@ -1,8 +1,0 @@
-googletrans==4.0.0-rc1
-aksharamukha
-PyPDF2
-Unidecode
-Pillow
-pytesseract
-pdf2image
-google-cloud-translate

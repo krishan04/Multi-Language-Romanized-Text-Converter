@@ -17,24 +17,30 @@ import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import java.io.IOException;
+
 @Service
 public class TranslationService {
 
     private final TranslationHistoryRepository translationHistoryRepository;
 
     // Adjust paths to your Python interpreter and script
-    private final String pythonPath = "/Users/krishanlakhotia/Desktop/Projects/Multi-Language-Romanized-Text-Converter/backend/textconverter_env/bin/python3";
-    private final String scriptPath = "/Users/krishanlakhotia/Desktop/Projects/Multi-Language-Romanized-Text-Converter/backend/pythonModules/translator_cli.py";
+    private final String pythonPath;
+    private final String scriptPath;
 
     public TranslationService(TranslationHistoryRepository translationHistoryRepository) {
         this.translationHistoryRepository = translationHistoryRepository;
+        this.pythonPath = System.getenv().getOrDefault("PYTHON_EXEC", "/Users/krishanlakhotia/Desktop/Projects/Multi-Language-Romanized-Text-Converter/backend/textconverter_env/bin/python3");
+        this.scriptPath = System.getenv().getOrDefault("TRANSLATOR_SCRIPT", "/Users/krishanlakhotia/Desktop/Projects/Multi-Language-Romanized-Text-Converter/backend/pythonModules/translator_cli.py");
+//        this.pythonPath = "/Users/krishanlakhotia/Desktop/Projects/Multi-Language-Romanized-Text-Converter/backend/textconverter_env/bin/python";
+//        this.scriptPath = "/Users/krishanlakhotia/Desktop/Projects/Multi-Language-Romanized-Text-Converter/backend/pythonModules/translator_cli.py";
     }
 
     public TranslationHistory translateAndSave(MultipartFile file, String plainText, String targetLanguage) {
         TranslationHistory history = new TranslationHistory();
         history.setSourceLang("auto");
         history.setTargetLang(targetLanguage);
-
+        Path filePath = null;
         try {
             boolean isFileInput = file != null && !file.isEmpty();
             String filePathString = null;
@@ -46,7 +52,7 @@ public class TranslationService {
                     Files.createDirectories(uploadDir);
                 }
 
-                Path filePath = uploadDir.resolve(file.getOriginalFilename());
+                filePath = uploadDir.resolve(file.getOriginalFilename());
                 Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
                 filePathString = filePath.toAbsolutePath().toString();
             }
@@ -110,6 +116,16 @@ public class TranslationService {
         } catch (Exception e) {
             e.printStackTrace();
             history.setTranslatedText("Translation failed: " + e.getMessage());
+        }finally {
+            // 7. Delete the file if it exists
+            if (filePath != null && Files.exists(filePath)) {
+                try {
+                    Files.delete(filePath);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.err.println("Failed to delete temporary file: " + filePath);
+                }
+            }
         }
 
         // 7. Save to database
@@ -120,7 +136,7 @@ public class TranslationService {
         return translationHistoryRepository.findAll();
     }
 
-    public boolean deleteTranslationHistory(Longs id) {
+    public boolean deleteTranslationHistory(Long id) {
         if(translationHistoryRepository.existsById(id)){
             translationHistoryRepository.deleteById(id);
             return true;
