@@ -6,7 +6,7 @@ export default function HistoryList() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://multi-language-romanized-text-converter.onrender.com/api/history")
+    fetch("https://multi-language-romanized-text-converter.onrender.com/history")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch history");
@@ -31,7 +31,7 @@ export default function HistoryList() {
   const deleteItem = async (id) => {
     try {
       // Add your delete API call here
-      const response = await fetch(`http://localhost:8080/api/history/${id}`, {
+      const response = await fetch(`https://multi-language-romanized-text-converter.onrender.com/history/${id}`, {
         method: "DELETE",
       });
 
