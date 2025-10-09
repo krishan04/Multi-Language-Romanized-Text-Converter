@@ -1,28 +1,19 @@
-# Step 1: Use official Node.js LTS image
+# Step 1: Build frontend
 FROM node:20-alpine AS build
-
-# Step 2: Set working directory
 WORKDIR /app
-
-# Step 3: Copy package files and install dependencies
 COPY package.json package-lock.json ./
 RUN npm install
-RUN npm install react react-dom
-RUN npm install axios
-RUN npm install lucide-react
-
-# Step 4: Copy source code
 COPY . .
-
-# Step 5: Build the app
 RUN npm run build
 
-# Step 6: Use Nginx to serve the static build
+# Step 2: Serve with Nginx and custom config
 FROM nginx:alpine
 COPY --from=build /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Step 7: Expose port
-EXPOSE 5173
-
-# Step 8: Start Nginx
+EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
+# RUN npm install
+# RUN npm install react react-dom
+# RUN npm install axios
+# RUN npm install lucide-react
