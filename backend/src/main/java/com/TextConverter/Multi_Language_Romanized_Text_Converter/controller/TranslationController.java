@@ -13,8 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 //        "http://localhost:5173", // ✅ Local dev
 //        "http://localhost:3000"  // ✅ Optional local React
 //},
-        allowedHeaders = "*",
-        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT, RequestMethod.OPTIONS})
+//        allowedHeaders = "*",
+//        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT, RequestMethod.OPTIONS})
 
 @RestController
 @RequestMapping("/api")
