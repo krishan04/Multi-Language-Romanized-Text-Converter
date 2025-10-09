@@ -15,12 +15,12 @@ public class WebConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**")
                         .allowedOrigins(
-                                "https://multi-language-romanized-text-converter-3lck.onrender.com",
-                                "http://localhost:5173"
+                                "http://localhost:5173", // local dev
+                                "https://multi-language-romanized-text-converter-3lck.onrender.com" // deployed frontend
                         )
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
-                        .allowCredentials(false);
+                        .allowCredentials(false); // set to false unless you need cookies/auth
             }
         };
     }
