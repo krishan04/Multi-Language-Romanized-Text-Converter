@@ -1,4 +1,4 @@
-# Step 1: Build frontend
+# Step 1: Build the frontend
 FROM node:20-alpine AS build
 WORKDIR /app
 COPY package.json package-lock.json ./
@@ -13,6 +13,7 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
+
 # RUN npm install
 # RUN npm install react react-dom
 # RUN npm install axios
