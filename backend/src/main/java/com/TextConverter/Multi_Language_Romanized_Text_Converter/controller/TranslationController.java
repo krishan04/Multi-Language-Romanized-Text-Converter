@@ -7,6 +7,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+@CrossOrigin(origins = {
+        "https://multi-language-romanized-text-conve.vercel.app", // ✅ Your Vercel frontend
+        "https://multi-language-romanized-text-converter-3lck.onrender.com", // ✅ Render frontend (if used)
+        "http://localhost:5173", // ✅ Local dev
+        "http://localhost:3000"  // ✅ Optional local React
+},
+        allowedHeaders = "*",
+        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT, RequestMethod.OPTIONS})
+
 @RestController
 @RequestMapping("/api")
 public class TranslationController {
