@@ -13,7 +13,7 @@ public class WebConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")
+                registry.addMapping("/api/**")
                         .allowedOrigins(
                                 "http://localhost:5173", // local dev
                                 "https://multi-language-romanized-text-converter-3lck.onrender.com" // deployed frontend
