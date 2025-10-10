@@ -29,7 +29,7 @@ public class UniversalCorsFilter extends OncePerRequestFilter {
             response.setHeader("Access-Control-Allow-Origin", "https://multi-language-romanized-text-converter-3lck.onrender.com");
             response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
             response.setHeader("Access-Control-Allow-Headers", "*");
-            response.setHeader("Access-Control-Allow-Credentials", "false");
+            response.setHeader("Access-Control-Allow-Credentials", "true");
         }
 
         // Handle preflight manually
