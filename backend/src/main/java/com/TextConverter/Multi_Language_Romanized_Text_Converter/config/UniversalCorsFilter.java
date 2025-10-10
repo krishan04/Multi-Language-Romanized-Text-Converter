@@ -26,7 +26,7 @@ public class UniversalCorsFilter extends OncePerRequestFilter {
 
         String origin = request.getHeader("Origin");
         if (origin != null && ALLOWED_ORIGINS.contains(origin)) {
-            response.setHeader("Access-Control-Allow-Origin", origin);
+            response.setHeader("Access-Control-Allow-Origin", "https://multi-language-romanized-text-converter-3lck.onrender.com");
             response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
             response.setHeader("Access-Control-Allow-Headers", "*");
             response.setHeader("Access-Control-Allow-Credentials", "false");
