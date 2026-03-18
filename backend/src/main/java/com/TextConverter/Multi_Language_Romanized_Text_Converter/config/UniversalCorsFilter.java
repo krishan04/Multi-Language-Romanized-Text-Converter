@@ -25,12 +25,17 @@ public class UniversalCorsFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         String origin = request.getHeader("Origin");
-        if (origin != null && ALLOWED_ORIGINS.contains(origin)) {
+        if (origin == null) {
+            origin = "https://multi-language-romanized-text-converter-3lck.onrender.com";
+        }
+
+        if (ALLOWED_ORIGINS.contains(origin)) {
             response.setHeader("Access-Control-Allow-Origin", origin);
             response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
             response.setHeader("Access-Control-Allow-Headers", "*");
             response.setHeader("Access-Control-Allow-Credentials", "true");
         }
+
 
         // Handle preflight manually
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {

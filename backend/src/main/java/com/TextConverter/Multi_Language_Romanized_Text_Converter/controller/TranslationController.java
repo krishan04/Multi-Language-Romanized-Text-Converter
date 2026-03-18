@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 //        allowedHeaders = "*",
 //        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT, RequestMethod.OPTIONS})
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api")
 public class TranslationController {

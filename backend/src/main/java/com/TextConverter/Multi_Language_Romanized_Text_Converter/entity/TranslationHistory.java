@@ -35,6 +35,7 @@ public class TranslationHistory {
     private String targetLang;
 
     @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
 }
