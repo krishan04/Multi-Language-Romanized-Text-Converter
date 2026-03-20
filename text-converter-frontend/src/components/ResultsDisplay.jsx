@@ -9,45 +9,85 @@ export default function ResultsDisplay({ translation, title }) {
   const copyToClipboard = (text, field) => {
     navigator.clipboard.writeText(text);
     setCopied(field);
-    setTimeout(() => setCopied(null), 2000);
+    setTimeout(() => setCopied(null), 1500);
   };
 
-  const ResultField = ({ label, value, field }) => (
-    <div className="group relative bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-4 hover:shadow-md transition-all duration-300">
-      <div className="flex justify-between items-start mb-2">
-        <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">{label}</span>
-        <button
-          onClick={() => copyToClipboard(value, field)}
-          className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-1 hover:bg-white rounded"
-        >
-          {copied === field ? (
-            <Check className="w-4 h-4 text-green-600" />
-          ) : (
-            <Copy className="w-4 h-4 text-gray-400" />
-          )}
-        </button>
-      </div>
-      <p className="text-gray-800 leading-relaxed">{value}</p>
-    </div>
+  const CopyButton = ({ value, field }) => (
+    <button
+      onClick={() => copyToClipboard(value, field)}
+      className="ml-2"
+    >
+      {copied === field ? (
+        <Check className="w-4 h-4 text-green-500" />
+      ) : (
+        <Copy className="w-4 h-4 text-gray-400 hover:text-white" />
+      )}
+    </button>
   );
 
   return (
-    <div className="bg-white rounded-2xl shadow-xl p-8 mb-8 border border-gray-100 animate-fadeIn">
-      <div className="flex items-center gap-3 mb-6">
+    <div className="bg-gray-800 rounded-2xl shadow-xl p-6 mb-8 border border-gray-700 animate-fadeIn">
+
+      {/* Header */}
+      <div className="flex items-center gap-3 mb-5">
         <div className="p-2 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg">
-          <Languages className="w-6 h-6 text-white" />
+          <Languages className="w-5 h-5 text-white" />
         </div>
         <div>
-          <h2 className="text-2xl font-bold text-gray-800">{title}</h2>
-          <p className="text-sm text-gray-500">Target: {translation.targetLang}</p>
+          <h2 className="text-xl font-bold text-white">{title}</h2>
+          <p className="text-xs text-gray-400">
+            Target: {translation.targetLang}
+          </p>
         </div>
       </div>
 
-      <div className="space-y-4">
-        <ResultField label="Original Text" value={translation.originalText} field="original" />
-        <ResultField label="Translated" value={translation.translatedText} field="translated" />
-        <ResultField label="Romanized" value={translation.romanizedText} field="romanized" />
-        <ResultField label="Plain Romanized" value={translation.plainRomanizedText} field="plain" />
+      {/* Table */}
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm text-left border-collapse">
+
+          <thead className="bg-gray-900 text-gray-300">
+            <tr>
+              <th className="p-3">Field</th>
+              <th className="p-3">Value</th>
+              <th className="p-3 text-center">Copy</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr className="border-b border-gray-700 hover:bg-gray-900">
+              <td className="p-3 text-gray-400">Original</td>
+              <td className="p-3 text-white">{translation.originalText}</td>
+              <td className="p-3 text-center">
+                <CopyButton value={translation.originalText} field="original" />
+              </td>
+            </tr>
+
+            <tr className="border-b border-gray-700 hover:bg-gray-900">
+              <td className="p-3 text-gray-400">Translated</td>
+              <td className="p-3 text-green-400">{translation.translatedText}</td>
+              <td className="p-3 text-center">
+                <CopyButton value={translation.translatedText} field="translated" />
+              </td>
+            </tr>
+
+            <tr className="border-b border-gray-700 hover:bg-gray-900">
+              <td className="p-3 text-gray-400">Romanized</td>
+              <td className="p-3 text-blue-400">{translation.romanizedText}</td>
+              <td className="p-3 text-center">
+                <CopyButton value={translation.romanizedText} field="romanized" />
+              </td>
+            </tr>
+
+            <tr className="hover:bg-gray-900">
+              <td className="p-3 text-gray-400">Plain</td>
+              <td className="p-3 text-purple-400">{translation.plainRomanizedText}</td>
+              <td className="p-3 text-center">
+                <CopyButton value={translation.plainRomanizedText} field="plain" />
+              </td>
+            </tr>
+          </tbody>
+
+        </table>
       </div>
     </div>
   );

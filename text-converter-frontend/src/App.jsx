@@ -3,7 +3,9 @@ import Home from "./pages/Home";
 import History from "./pages/History";
 
 function App() {
+
   return (
+
     <Router>
       <nav style={{ marginBottom: "20px" }}>
         <Link to="/" style={{ marginRight: "10px" }}>Home</Link>

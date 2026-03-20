@@ -64,50 +64,74 @@ export default function HistoryList() {
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+    <div className="bg-gray-800 rounded-2xl shadow-xl p-6 border border-gray-700">
+
+      {/* Header */}
       <div className="flex items-center gap-3 mb-6">
         <div className="p-2 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg">
           <History className="w-6 h-6 text-white" />
         </div>
-        <div className="flex-1">
-          <h2 className="text-2xl font-bold text-gray-800">Translation History</h2>
-          <p className="text-xs text-gray-500 mt-1">Showing last 10 translations</p>
+        <div>
+          <h2 className="text-2xl font-bold text-white">Translation History</h2>
+          <p className="text-xs text-gray-400">Last 10 translations</p>
         </div>
       </div>
 
-      <div className="space-y-4">
-        {history.map((item) => (
-          <div
-            key={item.id}
-            className="group bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-5 hover:shadow-lg transition-all duration-300 border border-gray-200"
-          >
-            <div className="flex justify-between items-start mb-3">
-              <div className="flex items-center gap-2">
-                <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold">
-                  {item.sourceLang} → {item.targetLang}
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-xs text-gray-500">
-                  {new Date(item.createdAt).toLocaleDateString()}
-                </span>
-                <button
-                  onClick={() => deleteItem(item.id)}
-                  className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-red-50 rounded"
-                >
-                  <Trash2 className="w-4 h-4 text-red-500" />
-                </button>
-              </div>
-            </div>
+      {/* Table */}
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm text-left border-collapse">
 
-            <div className="space-y-2 text-sm">
-              <p><span className="font-semibold text-gray-600">Original:</span> <span className="text-gray-800">{item.originalText}</span></p>
-              <p><span className="font-semibold text-gray-600">Translated:</span> <span className="text-gray-800">{item.translatedText || "—"}</span></p>
-              <p><span className="font-semibold text-gray-600">Romanized:</span> <span className="text-gray-800">{item.romanizedText || "—"}</span></p>
-              <p><span className="font-semibold text-gray-600">Plain Text:</span> <span className="text-gray-800">{item.plainRomanizedText || "—"}</span></p>
-            </div>
-          </div>
-        ))}
+          {/* Head */}
+          <thead className="bg-gray-900 text-gray-300">
+            <tr>
+              <th className="p-3">Date</th>
+              <th className="p-3">Original</th>
+              <th className="p-3">Translated</th>
+              <th className="p-3">Romanized</th>
+              <th className="p-3">Plain</th>
+              <th className="p-3 text-center">Action</th>
+            </tr>
+          </thead>
+
+          {/* Body */}
+          <tbody>
+            {history.map((item) => (
+              <tr
+                key={item.id}
+                className="border-b border-gray-700 hover:bg-gray-900 transition"
+              >
+                <td className="p-3 text-gray-400">
+                  {new Date(item.createdAt).toLocaleDateString()}
+                </td>
+
+                <td className="p-3 text-white max-w-xs truncate">
+                  {item.originalText}
+                </td>
+
+                <td className="p-3 text-green-400 max-w-xs truncate">
+                  {item.translatedText || "—"}
+                </td>
+
+                <td className="p-3 text-blue-400 max-w-xs truncate">
+                  {item.romanizedText || "—"}
+                </td>
+
+                <td className="p-3 text-purple-400 max-w-xs truncate">
+                  {item.plainRomanizedText || "—"}
+                </td>
+
+                <td className="p-3 text-center">
+                  <button
+                    onClick={() => deleteItem(item.id)}
+                    className="text-red-500 hover:text-red-400"
+                  >
+                    <Trash2 className="w-4 h-4 inline" />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
